@@ -18,6 +18,7 @@ class MemberResource extends JsonResource
             'id' => $this->id,
             'fullname' => $this->fullname,
             'address' => $this->address,
+            'gender' => $this->gender,
             'email' => $this->email,
             'phone' => $this->phone,
         ];    
