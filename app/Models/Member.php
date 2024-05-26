@@ -10,7 +10,15 @@ class Member extends Model
     protected $table = 'members';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
-    protected $incrementing = true;
-    protected $timestamps = true;   
+    public $incrementing = true;
+    public $timestamps = true;
+    
+    protected $fillable = [
+        'fullname',
+        'address',
+        'gender',
+        'email',
+        'phone',
+    ];
 
 }

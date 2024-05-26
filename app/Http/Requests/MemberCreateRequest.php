@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use \Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class MemberCreateRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class MemberCreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +26,16 @@ class MemberCreateRequest extends FormRequest
         return [
             'fullname' => ['required', 'string', 'max:100', 'unique:members'],
             'address' => ['required', 'string', 'max:100'],
-            'gender' => '[required, string, max:10]',
+            'gender' => ['required', 'string', 'max:10'],
+            'email' => ['required', 'email', 'max:100'],
+            'phone' => ['required', 'string', 'max:15']
         ];
-    };
+    }
+    
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response([
-            "errors" => $validator->getMessageBag()
-        ], 400));
-    };  
-}
+        throw new HttpResponseException(response()->json($validator->errors(), 400));
+    } 
+
+} 
+
