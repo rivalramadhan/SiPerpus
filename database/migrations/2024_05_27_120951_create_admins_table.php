@@ -18,10 +18,7 @@ return new class extends Migration
             $table->string('fullname', 100)->nullable(false);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('admins');

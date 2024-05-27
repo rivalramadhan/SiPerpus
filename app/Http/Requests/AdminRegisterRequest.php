@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use \Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class AdminRegisterRequest extends FormRequest
 {
@@ -24,8 +26,14 @@ class AdminRegisterRequest extends FormRequest
         return [
             'username' => ['required', 'string', 'max:100', 'unique:admins'],
             'password' => ['required', 'string', 'max:100'],
-            'fullname' => ['required', 'string', 'max:100'],
-            
+            'admin_name' => ['required', 'string', 'max:100'],
+
         ];
     }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors(), 400));
+    }   
+
+    
 }

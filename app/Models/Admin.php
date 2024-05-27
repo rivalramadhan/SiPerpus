@@ -12,6 +12,11 @@ class Admin extends Model
    protected $keyType = 'int';
    public $incrementing = true;
    public $timestamps = true;
-   
+
+   protected $fillable = [
+    'username',
+    'password',
+    'admin_name',
+];
 
 }
