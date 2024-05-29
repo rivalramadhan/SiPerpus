@@ -18,10 +18,11 @@ class MemberController extends Controller
         $member = new Member($data);
         $member->save();
         
-        return (new MemberResource($member))->response()->setStatusCode(201);
+        return (new MemberResource(true, "data created", $member))->response()->setStatusCode(201);
 
+    }       
+    public function get() {
+        $member = Member::all();
+        return (new MemberResource(true, "list data", $member))->response()->setStatusCode(200);
     }
-    
-        
-    
 }

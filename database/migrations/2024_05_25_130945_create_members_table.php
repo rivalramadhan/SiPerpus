@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('fullname', 100)->nullable(false)->unique('member_fullname_unique');
+            $table->string('fullname', 100)->nullable(false)->unique('');
             $table->string('address',100)->nullable(false);
             $table->string('gender',10)->nullable(false);
             

@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
+// member routes
 Route::post('/member',[App\Http\Controllers\MemberController::class, 'create']);
+Route::get('/member', [App\Http\Controllers\MemberController::class, 'get']);
 Route::post('/admin', [App\Http\Controllers\AdminController::class, 'register']);
 
 
