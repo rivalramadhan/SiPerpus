@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MemberResource extends JsonResource
+class BookResource extends JsonResource
 {
     public $status;
     public $message;
@@ -33,3 +33,4 @@ class MemberResource extends JsonResource
         ];    
     }
 }
+

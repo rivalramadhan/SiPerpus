@@ -27,14 +27,15 @@ class MemberCreateRequest extends FormRequest
             'fullname' => ['required', 'string', 'max:100', 'unique:members'],
             'address' => ['required', 'string', 'max:100'],
             'gender' => ['required', 'string', 'max:10'],
+            'member_pict' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:100'],
             'phone' => ['required', 'string', 'max:15']
         ];
     }
-    
+
     protected function failedValidation(Validator $validator)
     {
-        
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     } 
 
 } 
