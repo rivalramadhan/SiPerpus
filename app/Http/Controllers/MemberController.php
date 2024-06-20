@@ -13,16 +13,12 @@ use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class MemberController extends Controller
-{
+class MemberController extends Controller {
     
-
-
     public function index() {
         $member = Member::all();
         return (new MemberResource(true, "list data", $member))->response()->setStatusCode(200);
     }
-
     
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
@@ -38,10 +34,7 @@ class MemberController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // $image = $request->member_pict;
-        // $imagePath = $image->storeAs('public');
-
-        $uploadFolder = 'uploads/images';
+        $uploadFolder = 'uploads/member';
         $image = $request->file('member_pict');
         $image_uploaded_path = $image->store($uploadFolder, 'public');
 
@@ -58,5 +51,22 @@ class MemberController extends Controller
         return (new MemberResource(true, "data created", $member))->response()->setStatusCode(201);
     }
 
-    
+    public function show($id)
+    {
+        //find post by ID
+        $member = Member::find($id);
+
+        //return single post as a resource
+        return new MemberResource(true, 'Detail Data Post!', $member);
+    }
+
+    public function delete($id)
+    {
+
+        $member= Member::find($id);
+        Storage::delete('/uploads/member/'.basename($member->image));
+        $member->delete();
+        return new MemberResource(true, 'Data Member Berhasil Dihapus!', null);
+    }
+
 }
