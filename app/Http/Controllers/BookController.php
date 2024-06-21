@@ -46,4 +46,13 @@ class BookController extends Controller
     
         return (new BookResource(true, "data created", $book))->response()->setStatusCode(201);
     }
+
+    public function delete($id)
+    {
+
+        $book = Book::find($id);
+        Storage::delete('/uploads/books/'.basename($book->book_pict));
+        $book->delete();
+        return new BookResource(true, 'Data Member Berhasil Dihapus!', null);
+    }
 }
