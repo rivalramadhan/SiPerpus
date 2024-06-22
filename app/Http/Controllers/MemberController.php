@@ -53,18 +53,14 @@ class MemberController extends Controller {
 
     public function show($id)
     {
-        //find post by ID
         $member = Member::find($id);
-
-        //return single post as a resource
-        return new MemberResource(true, 'Detail Data Post!', $member);
+        return new MemberResource(true, 'Detail Data Member', $member);
     }
 
     public function delete($id)
     {
-
         $member= Member::find($id);
-        Storage::delete('/uploads/member/'.basename($member->image));
+        Storage::delete('/uploads/member/'.basename($member->me));
         $member->delete();
         return new MemberResource(true, 'Data Member Berhasil Dihapus!', null);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -47,12 +48,18 @@ class BookController extends Controller
         return (new BookResource(true, "data created", $book))->response()->setStatusCode(201);
     }
 
+    public function show($id)
+    {
+        $book = Book::find($id);
+        return new BookResource(true, 'Detail Data Buku', $book);
+    }
+
     public function delete($id)
     {
 
         $book = Book::find($id);
-        Storage::delete('/uploads/books/'.basename($book->book_pict));
+        Storage::delete('public/uploads/books'.basename($book->book_pict));
         $book->delete();
-        return new BookResource(true, 'Data Member Berhasil Dihapus!', null);
+        return new BookResource(true, 'Data Buku Berhasil Dihapus!', null);
     }
 }
