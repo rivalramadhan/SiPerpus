@@ -60,9 +60,41 @@ class MemberController extends Controller {
     public function delete($id)
     {
         $member= Member::find($id);
-        Storage::delete('/uploads/member/'.basename($member->me));
+        Storage::delete('/uploads/member/   '.basename($member->me));
         $member->delete();
         return new MemberResource(true, 'Data Member Berhasil Dihapus!', null);
     }
+    public function update(Request $request, $id) {
+        $member = Member::find($id);
+        $validator = Validator::make($request->all(), [
+            'fullname' => ['required', 'string', 'max:100', 'unique:members'],
+            'address' => ['required', 'string', 'max:100'],
+            'gender' => ['required', 'string', 'max:10'],
+            'email' => ['required', 'email', 'max:100'],
+            'phone' => ['required', 'string', 'max:15']
+        ]);
+        
+        if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+        }
+        if ($request->hasFile('member_pict')) {
+            $image = $request->file('book_pict');
+            $image->storeAs('uploads/member');
+
+            Storage::delete('uploads/member/'.basename($member->member_pict));
+            $member->update([
+                'fullname'        => $request->fullname,
+                'address'         => $request->address,
+                'gender'          => $request->gender,
+                'member_pict'     => $image,
+                'email'           => $request->email,
+                'phone'           => $request->phone
+
+
+            ]);
+        }
+        return new MemberResource(true,'Update iyoonu', $member);
+    }
+        
 
 }

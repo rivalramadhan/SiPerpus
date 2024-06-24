@@ -20,11 +20,20 @@ class AdminController extends Controller
             return response()->json(['message' => 'Username already exists'], 400);
         }
         $admin = new Admin($data);
-        // $admin->password = Hash::make($data['password']);
+        
+        
         $admin->save();
 
         return (new AdminResource($admin))->response()->setStatusCode(201);
 
+    }
+    public function login (Request $request) {
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string'
+        ]);
+        $admin = Admin::where('username', $request->username)->first();
+        var_dump($admin);
     }
     
         

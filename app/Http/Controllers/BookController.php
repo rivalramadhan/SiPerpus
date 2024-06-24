@@ -58,7 +58,7 @@ class BookController extends Controller
     {
 
         $book = Book::find($id);
-        Storage::delete('public/uploads/books'.basename($book->book_pict));
+        Storage::delete('uploads/books'.basename($book->book_pict));
         $book->delete();
         return new BookResource(true, 'Data Buku Berhasil Dihapus!', null);
     }
