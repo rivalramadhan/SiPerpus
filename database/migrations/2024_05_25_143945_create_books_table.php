@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('book_title', 100)->nullable(false)->unique('book_title_unique');
             $table->date('release_date')->nullable(false);
-            
             $table->timestamps();
         });
     }

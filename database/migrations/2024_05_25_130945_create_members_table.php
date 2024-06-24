@@ -13,8 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('fullname', 100)->nullable(false)->unique('');
             $table->string('address',100)->nullable(false);
-            $table->string('gender',10)->nullable(false);
-            
+            $table->string('gender',10)->nullable(false);    
             $table->timestamps();
         });
     }

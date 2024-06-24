@@ -28,5 +28,8 @@ Route::get('/search-book/{id}', [BookController::class, 'show']);
 Route::post('/register-admin', [AdminController::class, 'register']);
 Route::post('/login-admin', [AdminController::class, 'login']);
 
+// rentbook url
+Route::get('/get-all-rentbook', [BookController::class,'index']);
+
 
 
