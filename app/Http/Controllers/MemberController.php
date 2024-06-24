@@ -92,7 +92,15 @@ class MemberController extends Controller {
 
 
             ]);
-        }
+        } else  {
+            $member->update([
+                'fullname'        => $request->fullname,
+                'address'         => $request->address,
+                'gender'          => $request->gender,
+                'email'           => $request->email,
+                'phone'           => $request->phone
+
+            ]);}
         return new MemberResource(true,'Update iyoonu', $member);
     }
         
