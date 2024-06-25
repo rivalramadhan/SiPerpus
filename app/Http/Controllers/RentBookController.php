@@ -21,7 +21,6 @@ class RentBookController extends Controller
             'fullname' => ['required', 'String'],
             'rent_date' => ['required', 'date'],
             'return_date' => ['required', 'date'],
-            'status' => ['required', 'string', 'max:100']
         ]);
 
         if ($validator->fails()) {
