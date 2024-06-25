@@ -20,7 +20,8 @@ class RentBookController extends Controller
             'book_title' => ['required', 'String'],
             'fullname' => ['required', 'String'],
             'rent_date' => ['required', 'date'],
-            'return_date' => ['required', 'date']
+            'return_date' => ['required', 'date'],
+            'status' => ['String']
         ]);
 
         if ($validator->fails()) {
