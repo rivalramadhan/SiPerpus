@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RentBookController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -29,7 +30,7 @@ Route::post('/register-admin', [AdminController::class, 'register']);
 Route::post('/login-admin', [AdminController::class, 'login']);
 
 // rentbook url
-Route::get('/get-all-rentbook', [BookController::class,'index']);
+Route::get('/get-all-rentbook', [RentBookController::class,'index']);
 
 
 
