@@ -56,10 +56,48 @@ class BookController extends Controller
 
     public function delete($id)
     {
-
         $book = Book::find($id);
         Storage::delete('uploads/books'.basename($book->book_pict));
         $book->delete();
         return new BookResource(true, 'Data Buku Berhasil Dihapus!', null);
     }
+    public function update(Request $request, $id) {
+        $book = Book::find($id);
+        $validator = Validator::make($request->all(), [
+            'book_title' => ['required', 'string', 'max:100', 'unique:books'],
+            'author' => ['required', 'string', 'max:100'],
+            'isbn' => ['required', 'string', 'max:100'],
+            'release_date' => ['required', 'string', 'max:100']
+        ]);
+        
+        if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+        }
+        if ($request->hasFile('book_picy')) {
+            $image = $request->file('book_pict');
+            $image->storeAs('uploads/books');
+
+            Storage::delete('uploads/books/'.basename($book->book_pict));
+            $book->update([
+                'book_title'       => $request->book_title,
+                'author'           => $request->author,
+                'isbn'             => $request->isbn,
+                'book_pict'        => $image,
+                'release_date'     => $request->release_date,
+
+
+
+            ]);
+        } else  {
+            $book->update([
+                'book_title'       => $request->book_title,
+                'author'           => $request->author,
+                'isbn'             => $request->isbn,
+                'release_date'     => $request->release_date,
+
+
+            ]);}
+        return new BookResource(true,'Update berhasil', $book);
+    }
+        
 }
