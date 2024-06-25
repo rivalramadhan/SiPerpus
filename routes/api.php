@@ -31,6 +31,7 @@ Route::post('/login-admin', [AdminController::class, 'login']);
 
 // rentbook url
 Route::get('/get-all-rentbook', [RentBookController::class,'index']);
+Route::post('/add-rentbook', [RentBookController::class, 'create']);
 
 
 

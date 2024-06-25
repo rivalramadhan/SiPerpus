@@ -36,4 +36,5 @@ class RentBookController extends Controller
         ]);
         return (new RentBookResource(true, "data created", $rentbook));
     }
+    public function update(Request $request) {}
 }
