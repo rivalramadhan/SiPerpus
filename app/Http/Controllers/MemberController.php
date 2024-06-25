@@ -60,7 +60,7 @@ class MemberController extends Controller {
     public function delete($id)
     {
         $member= Member::find($id);
-        Storage::delete('/uploads/member/   '.basename($member->me));
+        Storage::delete('/uploads/member/'.basename($member->member_pict));
         $member->delete();
         return new MemberResource(true, 'Data Member Berhasil Dihapus!', null);
     }
@@ -101,7 +101,7 @@ class MemberController extends Controller {
                 'phone'           => $request->phone
 
             ]);}
-        return new MemberResource(true,'Update iyoonu', $member);
+        return new MemberResource(true,'Update berhasil', $member);
     }
         
 
