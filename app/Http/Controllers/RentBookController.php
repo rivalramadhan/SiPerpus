@@ -50,10 +50,6 @@ class RentBookController extends Controller
     public function update(Request $request, $id) {
         $rentbook = RentBook::find($id);
         $validator = Validator::make($request->all(), [
-            'book_title' => ['required', 'String'],
-            'fullname' => ['required', 'String'],
-            'rent_date' => ['required', 'date'],
-            'return_date' => ['required', 'date'],
             'status' => ['String']
         ]);
         
@@ -61,10 +57,6 @@ class RentBookController extends Controller
                 return response()->json($validator->errors(), 422);
         }
             $rentbook->update([
-                'book_title' => $request->book_title,
-                'fullname' => $request->fullname,
-                'rent_date' => $request->rent_date,
-                'return_date' => $request->return_date,
                 'status' => $request->status
             ]);
             return new RentBookResource(true,'Update berhasil', $rentbook);
