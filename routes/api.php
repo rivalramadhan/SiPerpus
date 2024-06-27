@@ -12,12 +12,15 @@ use App\Http\Controllers\RentBookController;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
+
 // member url
-Route::post('/add-member',[MemberController::class, 'create']);
-Route::get('/get-all-member', [MemberController::class, 'index']);
-Route::delete('/delete-member/{id}', [MemberController::class, 'delete']);
-Route::get('/search-member/{id}', [MemberController::class, 'show']);
-Route::put('/update-member/{id}', [MemberController::class,'update']);
+Route::prefix('member')->group(function () {
+    Route::post('/add-member',[MemberController::class, 'create']);
+    Route::get('/get-all-member', [MemberController::class, 'index']);
+    Route::delete('/delete-member/{id}', [MemberController::class, 'delete']);
+    Route::get('/search-member/{id}', [MemberController::class, 'show']);
+    Route::put('/update-member/{id}', [MemberController::class,'update']);
+});
 
 // book url
 Route::post('/add-book',[BookController::class, 'create']);
